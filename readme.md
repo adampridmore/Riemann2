@@ -1,7 +1,7 @@
 # Riemann
 
 
-## Ton run
+## To run
 
 ``
 dotnet fsi script1.fsx 

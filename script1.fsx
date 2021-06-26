@@ -11,14 +11,32 @@
 
 let f n s = 1.0 / (n ** s) 
 
-let z s = 
+let zseq s : seq<float> = 
   let iterations = 100
   
   [1..iterations]
   |> Seq.map float
   |> Seq.map (fun n -> f n s)
-  |> Seq.sum
 
-z (2.0)
-z (3.0)
-printfn "%A" (z (-1.0))
+
+let zagg (s : float) : (seq<float>) = 
+  s
+  |> zseq
+  |> Seq.scan (fun (state : float) x -> (x + state)) (0.0)
+  
+let z s : float = 
+   zseq s |> Seq.sum
+
+
+
+let printfunction fn s = 
+  s 
+  |> fn
+  |> Seq.iteri(fun i x -> printfn "%d : %A" i x)
+
+// printfunction zseq 1.0
+
+printfunction zagg 8.0
+
+
+
