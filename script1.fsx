@@ -1,5 +1,7 @@
 // #r "nuget: FSharp.Charting, 2.1.0"
 
+#r "nuget: XPlot.Plotly, 4.0.3"
+
 // printfn "Hello"
 
 // let x = 
@@ -11,13 +13,11 @@
 
 let f n s = 1.0 / (n ** s) 
 
-let zseq s : seq<float> = 
-  let iterations = 100
-  
-  [1..iterations]
-  |> Seq.map float
-  |> Seq.map (fun n -> f n s)
+let iterations = 100
 
+let zseq s : seq<float> = 
+  [1..iterations]
+  |> Seq.map (float >> fun n -> f n s)
 
 let zagg (s : float) : (seq<float>) = 
   s
@@ -37,6 +37,5 @@ let printfunction fn s =
 // printfunction zseq 1.0
 
 printfunction zagg 8.0
-
 
 

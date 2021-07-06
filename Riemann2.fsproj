@@ -10,4 +10,8 @@
     <Compile Include="Library.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="XPlot.Plotly" Version="4.0.3" />
+  </ItemGroup>
+
 </Project>
