@@ -34,8 +34,13 @@ let printfunction fn s =
   |> fn
   |> Seq.iteri(fun i x -> printfn "%d : %A" i x)
 
-// printfunction zseq 1.0
+//printfunction zseq 2.0
 
-printfunction zagg 8.0
+printfunction zagg 2.0
 
+(System.Math.PI ** 2.0) / 6.0
 
+// open XPlot.Plotly
+
+// let results = zagg 2.0
+// results |> Chart.Line |> Chart.Show
