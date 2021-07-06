@@ -1,42 +1,33 @@
-// #r "nuget: FSharp.Charting, 2.1.0"
-
 #r "nuget: XPlot.Plotly, 4.0.3"
 
-// printfn "Hello"
-
-// let x = 
-//   [1..10]
-//   |> Seq.sum
-
-// printfn "%d" x
+open System.Numerics
 
 
-let f n s = 1.0 / (n ** s) 
+let f (n : int32) (s: Complex) = Complex.One / (Complex(n |> float, 0.0) ** s) 
 
 let iterations = 100
 
-let zseq s : seq<float> = 
+let zseq s : seq<Complex> = 
   [1..iterations]
-  |> Seq.map (float >> fun n -> f n s)
+  |> Seq.map (fun n -> f n s)
 
-let zagg (s : float) : (seq<float>) = 
+let zagg (s : Complex) : (seq<Complex>) = 
   s
   |> zseq
-  |> Seq.scan (fun (state : float) x -> (x + state)) (0.0)
+  |> Seq.scan (fun (state : Complex) x -> (x + state)) (Complex.Zero)
   
-let z s : float = 
-   zseq s |> Seq.sum
+let z s = 
+   zseq s |> Seq.fold ( + ) Complex.Zero
 
 
-
-let printfunction fn s = 
-  s 
+let printfunction fn sequence = 
+  sequence
   |> fn
   |> Seq.iteri(fun i x -> printfn "%d : %A" i x)
 
 //printfunction zseq 2.0
 
-printfunction zagg 2.0
+printfunction zagg (Complex(2.0, 0.0))
 
 (System.Math.PI ** 2.0) / 6.0
 
