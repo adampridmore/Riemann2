@@ -1,7 +1,7 @@
-#r "nuget: XPlot.Plotly, 4.0.3"
+#r "nuget: XPlot.Plotly"
 
 open System.Numerics
-
+open XPlot.Plotly
 
 let f (n : int32) (s: Complex) = Complex.One / (Complex(n |> float, 0.0) ** s) 
 
@@ -15,6 +15,7 @@ let zagg (s : Complex) : (seq<Complex>) =
   s
   |> zseq
   |> Seq.scan (fun (state : Complex) x -> (x + state)) (Complex.Zero)
+  |> Seq.skip 1
   
 let z s = 
    zseq s |> Seq.fold ( + ) Complex.Zero
@@ -25,13 +26,13 @@ let printfunction fn sequence =
   |> fn
   |> Seq.iteri(fun i x -> printfn "%d : %A" i x)
 
-//printfunction zseq 2.0
 
-printfunction zagg (Complex(2.0, 0.0))
+//printfunction zagg (Complex(2.0, 0.0))
+//(System.Math.PI ** 2.0) / 6.0
 
-(System.Math.PI ** 2.0) / 6.0
 
-// open XPlot.Plotly
+let toPlotPoints (cseq: seq<Complex>) =  cseq |> Seq.map (fun x -> x.Real, x.Imaginary )
 
-// let results = zagg 2.0
-// results |> Chart.Line |> Chart.Show
+zagg (Complex(2.0, 2.0))
+|> toPlotPoints
+|> Chart.Line |> Chart.Show
