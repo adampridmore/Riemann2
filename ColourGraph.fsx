@@ -1,5 +1,7 @@
 #r "nuget: XPlot.Plotly"
 
+#load "Helpers.fsx"
+
 open XPlot.Plotly
 open System.Numerics
 open System
@@ -39,9 +41,11 @@ let PI = Math.PI
 
 let s =
   Complex(1.5, 0.0)
-  |> Seq.unfold(fun c -> Some(c, c * Complex(Math.Cos(PI / 32.0), Math.Sin( PI / 32.0)) ))
+  |> initInfinite (fun c ->  c * Complex(Math.Cos(PI / 32.0), Math.Sin( PI / 32.0)))
   |> Seq.take 65
 
 let fn (s : Complex) : Complex = s ** s
 
 graphFns fn s
+
+
