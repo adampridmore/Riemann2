@@ -2,7 +2,6 @@
 
 open XPlot.Plotly
 
-
 let next n = 
   match n with
   | n when n % 2 = 0 -> n / 2
@@ -10,13 +9,13 @@ let next n =
 
 
 let collatz x = 
-  Seq.unfold (fun n -> 
-  if n = 1 then None 
-  else
-    Some(n, next n)
-  ) x
-
-
+  Seq.append [x] (Seq.unfold (fun n -> 
+    match n with
+    | 1 -> None
+    | n -> let n1 = n |> next
+           Some(n1,n1)
+  ) x)
+  
 let results  = 
   collatz 27
   |> Seq.mapi(fun i  n -> (i, n))
