@@ -1,10 +1,11 @@
 #r "nuget: XPlot.Plotly"
 
-#load "Helpers.fsx"
-
 open XPlot.Plotly
 open System.Numerics
 open System
+
+#load "Helpers.fsx"
+open Helpers
 
 let graphFns (fn : Complex -> Complex) (s : seq<Complex>) : Unit =
 
