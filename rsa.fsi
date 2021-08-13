@@ -52,20 +52,23 @@ let fn (a : bigint) : bigint =
 
 
 
-let isPrime (p :int) : bool = 
-  // let p = 8
-  let a : bigint = bigint(123)
-  //let a = 10
-
+let isPrime (smallP :int) : bool = 
+ 
+  //fermat's little theorem
+  // https://en.wikipedia.org/wiki/Fermat%27s_little_theorem
   // a^p = a (mod p)
-  // let x = pown a p
-  let x = BigInteger.Pow(a,p)
-  // let result  = x % p
-  let result  = BigInteger.(%) (x, bigint(p))
+  // if p is prime
+  let flt a p =  
+    let result : bigint = BigInteger.ModPow(a,p,p)
+    result = a % p    
 
-  result = a % (bigint(p))
+  let p : bigint = bigint(smallP)
+  let a1 : bigint = BigInteger.Parse("123456789") // Random number 1
+  let a2 : bigint = BigInteger.Parse("987654321") // Random number 2
 
-seq{1..100}
+  flt a1 p && flt a2 p
+
+seq{1000000..1010000}
 |> Seq.filter(isPrime)
 |> Seq.iter (printfn "%d")
 
@@ -73,11 +76,3 @@ seq{1..100}
 isPrime(85) // ?? Wrong
 
 
-
-
-// let i = new BigInteger(10)
-// let i2 = new bigint(20)
-
-// BigInteger.Pow(bigint(123), 2)
-
-// BigInteger.(%) ((bigint(105)), (bigint(20)))
