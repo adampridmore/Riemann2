@@ -2,9 +2,9 @@
 
 open System.Numerics
 
-//fermat's little theorem
+//{\displaystyle (m^{e})^{d}\equiv m{\pmod {n}}}
 // https://en.wikipedia.org/wiki/Fermat%27s_little_theorem
-// a^p = a (mod p)
+// a^p = a      (mod p)
 // if p is prime
 let isPrime (smallP :int) : bool = 
   let flt a p =  
@@ -25,6 +25,12 @@ let isPrime (smallP :int) : bool =
 // https://en.wikipedia.org/wiki/Euler%27s_theorem
 
 // RSA
+// https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+// (m^e)^d = m % n
+
+// p & q -> primes
+// n = pq
+
 
 // (p-1)(1-1) ??
 
