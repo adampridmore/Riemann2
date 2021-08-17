@@ -1,6 +1,7 @@
 #r "System.Runtime.Numerics.dll"
 
 open System.Numerics
+open Checked
 
 //{\displaystyle (m^{e})^{d}\equiv m{\pmod {n}}}
 // https://en.wikipedia.org/wiki/Fermat%27s_little_theorem
@@ -24,13 +25,13 @@ let isPrime (smallP :int) : IsPrime =
   if flt a1 p && flt a2 p then Maybe
   else No
 
-seq{1000000..1010000}
-|> Seq.filter(fun i -> (isPrime i ) = No)
-|> Seq.iter (printfn "%d is maybe prime")
+// seq{1000000..1010000}
+// |> Seq.filter(fun i -> (isPrime i ) = No)
+// |> Seq.iter (printfn "%d is maybe prime")
 
 
-85
-isPrime(85) // ?? Wrong
+// 85
+// isPrime(85) // ?? Wrong
 
 
 
@@ -48,14 +49,17 @@ isPrime(85) // ?? Wrong
 
 // (p-1)(1-1) ??
 
+// x ^ a ^ b      mod n
 
+3.0 ** 4.0
+(3.0 ** 2.0 % mod ** 2.0
 
+let pow (a: int) (b: int) = 
+  match b with 
+  | 0 -> 1
+  | _ -> 
+    seq{0..b-2} 
+    |> Seq.fold (fun acc i -> acc * a) a
 
-
-
-
-
-
-
-
-
+(pow 6 5) % 50
+pow ((pow 6 3) % 50) 2 % 50
